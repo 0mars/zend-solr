@@ -1,0 +1,18 @@
+{
+    "name": "humanoyd/zend-solr",
+    "description": "Apache Solr Wrapper for Zend Framework",
+    "license": "New BSD",
+    "keywords": ["solr", "apache","apache solr","zend solr","zend framework"],
+    "homepage": "http://www.omaroid.com",
+    "authors": [
+        {
+            "name": "Omar A. Shaban",
+            "email": "omar@omaroid.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+	"php": ">=5.3.2",
+        "ext-solr": "*"
+    }
+}
