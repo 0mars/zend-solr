@@ -31,14 +31,14 @@ class Apache_Solr_Index extends SolrClient
 	/**
 	 * Adds a document to Solr Index
 	 * 
-	 * Applies index-time boosting using the $boosts property
+	 * Applies index-time boosting (optional) 
 	 * 
 	 * @param array $data associative array of key value
-	 * @param bool $allowDups
+	 * @param bool $overwrite
 	 * @param int $commitWithin commit within (in milliseconds)
 	 * @return SolrUpdateResponse
 	 */
-	public function indexDocument(Array $data,$allowDups=false,$commitWithin=false)
+	public function indexDocument(Array $data,$overwrite=true,$commitWithin=false)
 	{
 		$doc = new SolrInputDocument();
 		foreach ($data as $field=>$value){
@@ -57,12 +57,12 @@ class Apache_Solr_Index extends SolrClient
 			}else{
 				$enc = mb_detect_encoding($value);
 				$value = @iconv($enc, 'UTF-8//IGNORE', $value);
-				$doc->addField($field,$value,$boost);
+				$doc->addField($field, $value, $boost);
 			}
 		}
 		try
 		{
-			return $this->addDocument($doc,$allowDups,$commitWithin);
+			return $this->addDocument($doc,$overwrite,$commitWithin);
 		}catch(Exception $e)
 		{
 			error_log($this->getDebug());

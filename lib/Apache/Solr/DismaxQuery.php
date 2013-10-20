@@ -13,13 +13,13 @@ class Apache_Solr_DismaxQuery extends Apache_Solr_Query_Abstract
 	/**
 	 * Search Solr Index
 	 *
-	 * @param string $query lucene query string
+	 * @param string $query query string (keywords)
 	 * @param array $fields fields to select from the query return (fl param)
 	 * @param array $filters array of filters (e.g array('cuisines'=>(array('chinese','egyptian')))
 	 * @param array $sort array of sorting parameters (e.g. array('tagline'=>'asc')
 	 * @param integer $offset
 	 * @param integer $count
-	 * @return Apache_Solr_Query_Result
+	 * @return Apache_Solr_Query_Result|FALSE
 	 */
 	public function search($query=null,$fields=array(), $filters = array(),$sort=array(), $offset=0, $count=10,array $params=array()){
 		if($query){
@@ -56,6 +56,11 @@ class Apache_Solr_DismaxQuery extends Apache_Solr_Query_Abstract
 		}
 	}
 	
+	/**
+	 * Boost preset field boosts (qf)
+	 * 
+	 * @see Apache_Solr_Query_Abstract::boost()
+	 */
 	public function boost(){
 		$aggBoosts = array();
 		if ($this->_fieldBoosts) {
@@ -71,6 +76,5 @@ class Apache_Solr_DismaxQuery extends Apache_Solr_Query_Abstract
 				$this->setParam('qf', implode(' ',$aggBoosts));
 			}
 		}
-	
 	}
 }
