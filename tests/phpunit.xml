@@ -1,0 +1,21 @@
+<phpunit bootstrap="bootstrap.php">
+	<testsuite name="Apache Tests">
+<directory suffix=".php">./Apache</directory>
+	</testsuite>
+
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">../lib/</directory>
+			
+		</whitelist>
+
+	</filter>
+	<logging>
+		<log type="coverage-html" target="./log/report" charset="UTF-8"
+			yui="true" highlight="true" lowUpperBound="50" highLowerBound="80" />
+		<log type="testdox" target="./log/testdox.html" />
+	</logging>
+	<php>
+		<ini name="memory_limit" value="2048M" />
+	</php>
+</phpunit>
