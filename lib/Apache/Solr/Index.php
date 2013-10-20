@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Apache Solr Index, the main client
+ * Added features to existing SolrClient
+ *
+ * @license http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @author Omar A. Shaaban <omar@omaroid.com>
+ *
+ */
 class Apache_Solr_Index extends SolrClient
 {
 	

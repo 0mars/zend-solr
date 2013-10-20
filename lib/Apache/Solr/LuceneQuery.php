@@ -1,6 +1,12 @@
 <?php
 
-
+/**
+ * Apache Solr Lucene Query Wrapper
+ *
+ * @license http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @author Omar A. Shaaban <omar@omaroid.com>
+ *
+ */
 class Apache_Solr_LuceneQuery extends Apache_Solr_Query_Abstract
 {
 	
@@ -37,10 +43,11 @@ class Apache_Solr_LuceneQuery extends Apache_Solr_Query_Abstract
 		if($this->faceted || $this->getFacet() ){
 			$this->applyFacets();
 		}
+		
 		$this->addFilters($filters);
-		// search fields
 		$this->setFields($fields);
 		$this->sort();
+		
 		$this->setStart($offset);
 		$this->setRows($count);
 		$queryResponse = $this->_client->query($this);
@@ -54,6 +61,10 @@ class Apache_Solr_LuceneQuery extends Apache_Solr_Query_Abstract
 		}
 	}
 	
+	/**
+	 * (non-PHPdoc)
+	 * @see Apache_Solr_Query_Abstract::boost()
+	 */
 	public function boost()
 	{
 		return false;

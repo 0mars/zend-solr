@@ -1,9 +1,18 @@
 <?php
 
-
+/**
+ * Apache Solr DisMax/eDisMax Query Wrapper 
+ *
+ * @license http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @author Omar A. Shaaban <omar@omaroid.com>
+ *
+ */
 class Apache_Solr_DismaxQuery extends Apache_Solr_Query_Abstract
 {
-	
+	/**
+	 * 
+	 * @param string $q Query String
+	 */
 	public function __construct($q=null){
 		parent::__construct($q);
 		$this->setQueryParser(self::EDISMAX_QP);

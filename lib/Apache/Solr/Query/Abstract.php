@@ -66,8 +66,6 @@ abstract class Apache_Solr_Query_Abstract extends SolrQuery
 	
 	public $debug = false;
 	
-	public $queryString = null;
-	
 	/**
 	 * Dismax Query Parser
 	 * @var string
@@ -82,7 +80,7 @@ abstract class Apache_Solr_Query_Abstract extends SolrQuery
 	
 	/**
 	 * Lucene Query Parser
-	 * @var unknown
+	 * @var string
 	 */
 	const LUCENE_QP  = 'lucene';
 	
@@ -143,13 +141,15 @@ abstract class Apache_Solr_Query_Abstract extends SolrQuery
 		}
 		
 		$this->addFilters($filters);
-		// search fields
+		
 		$this->setFields($fields);
 		$this->sort();
 		$this->boost();
 		$this->applyFacets();
+		
 		$this->setStart($offset);
 		$this->setRows($count);
+		
 		$queryResponse = $this->_client->query($this);
 		if ($queryResponse->success()) {
 			$this->_response = $queryResponse;
@@ -208,7 +208,7 @@ abstract class Apache_Solr_Query_Abstract extends SolrQuery
 	 * @param string $boost example: ^2
 	 * @return Apache_Solr_Query_Abstract
 	 */
-	public function addBoost($field,$boost)
+	public function addBoost($field, $boost)
 	{
 		$this->_fieldBoosts[$field] = $boost;
 		return $this;
@@ -433,6 +433,9 @@ abstract class Apache_Solr_Query_Abstract extends SolrQuery
 		}
 	}
 	
+	/**
+	 * Boost preset fields in $_fieldBoosts
+	 */
 	abstract public function boost();
 	
 }

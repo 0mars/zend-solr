@@ -10,6 +10,12 @@
 class Apache_Resource_Solr 
 	extends Zend_Application_Resource_ResourceAbstract
 {
+	/**
+	 * Initialize solr resource, with configuration
+	 * Options
+	 * 
+	 * @see Zend_Application_Resource_Resource::init()
+	 */
 	public function init()
 	{
 		$config = $this->getOptions();
