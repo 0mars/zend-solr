@@ -21,6 +21,10 @@ class Apache_Solr_Query_Result
 	 */
 	protected $response;
 	
+	/**
+	 * 
+	 * @param SolrQueryResponse $response
+	 */
 	public function __construct(SolrQueryResponse $response)
 	{
 		$this->queryResponse = $response;
