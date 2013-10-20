@@ -12,10 +12,7 @@ class Apache_Solr_Index extends SolrClient
 	 * 
 	 * @var array
 	 */
-	private $boosts = array(
-// 			'b_name'	=> 2,
-// 			'tagline'	=> 2
-	);
+	protected $_boosts = array();
 	
 	/**
 	 * Adds an array of documents to the index
@@ -34,6 +31,8 @@ class Apache_Solr_Index extends SolrClient
 	/**
 	 * Adds a document to Solr Index
 	 * 
+	 * Applies index-time boosting using the $boosts property
+	 * 
 	 * @param array $data associative array of key value
 	 * @param bool $allowDups
 	 * @param int $commitWithin commit within (in milliseconds)
@@ -43,8 +42,8 @@ class Apache_Solr_Index extends SolrClient
 	{
 		$doc = new SolrInputDocument();
 		foreach ($data as $field=>$value){
-			if(isset($this->boosts[$field])){
-				$boost = $this->boosts[$field];
+			if(isset($this->_boosts[$field])){
+				$boost = $this->_boosts[$field];
 			}else{
 				$boost = NULL;
 			}
@@ -71,12 +70,42 @@ class Apache_Solr_Index extends SolrClient
 		}
 	}
 	
-	public function AddBoosts(array $boosts){
-		$this->boosts = $this->boosts + $boosts;
+	/**
+	 * 
+	 * @param array $boosts
+	 * @return Apache_Solr_Index
+	 */
+	public function addBoosts(array $boosts){
+		$this->_boosts = $this->_boosts + $boosts;
+		return $this;
 	}
 	
+	/**
+	 * 
+	 * @param array $boosts
+	 * @return Apache_Solr_Index
+	 */
 	public function setBoosts(array $boosts){
-		$this->boosts = $boosts;
+		$this->_boosts = $boosts;
+		return $this;
+	}
+	
+	/**
+	 * Get Defined boosts
+	 * @return array
+	 */
+	public function getBoosts(){
+		return $this->boosts;
+	}
+	
+	/**
+	 * Boost a field (used in index time)
+	 * @param string $field
+	 * @param string $boost
+	 */
+	public function addBoost($field, $boost)
+	{
+		$this->_boosts[$field] = $boost;
 	}
 	
 }
