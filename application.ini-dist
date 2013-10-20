@@ -1,0 +1,10 @@
+; +--------+
+; |  Solr  |
+; +--------+
+
+resources.solr.hostname = "localhost"
+;resources.solr.login = "yourlogin"
+;resources.solr.password = "yourpassword"
+resources.solr.port = 8983
+resources.solr.path = "solr/collection1"
+;resources.solr.wt = "phpnative"
